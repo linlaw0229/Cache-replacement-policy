@@ -162,28 +162,4 @@ public:
     void   UpdateLRU( UINT32 setIndex, INT32 updateWayID, int blockalive );
 };
 
-class SAMPLER_CACHE : public CACHE_REPLACEMENT_STATE
-{
-  private:
-    UINT32 numsets;
-    UINT32 assoc;
-    UINT32 replPolicy;
-  public:
-    SAMPLER_CACHE(UINT32 _sets, UINT32 _assoc, UINT32 _pol ){
-      numsets= _sets;
-      assoc= _assoc;
-      replPolicy= _pol;
-        printf("sampler cache init\n" );
-    };
-      //CACHE_REPLACEMENT_STATE( UINT32 _sets, UINT32 _assoc, UINT32 _pol ),
-        //numsets(_sets), assoc(_assoc), replPolicy(_pol);
-    void Training(Addr_t PC, Addr_t block_address);
-    vector<int> m_sampler_set;
-    int theta; //check if training is triggered
-    Addr_t GetIndex(Addr_t PC, int feature);
-    void   InitReplacementState();
-    LINE_REPLACEMENT_STATE   **repl;
-};
-
-
 #endif

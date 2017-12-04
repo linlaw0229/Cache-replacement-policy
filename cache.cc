@@ -212,7 +212,7 @@ bool cache_access (cache *c, unsigned long long int address, unsigned long long 
 			v[i].valid = 1;
 			assert (i >= 0 && i < assoc);
 #ifdef DANSHIP
-			printf("before UpdateReplacementState\n");
+			
 			c->repl->UpdateReplacementState (set, i, &ls, core, pc, at, false, address);
 #else
 			c->repl->UpdateReplacementState (set, i, &ls, core, pc, at, false);
