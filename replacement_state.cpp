@@ -244,7 +244,7 @@ void CACHE_REPLACEMENT_STATE::UpdateReplacementState(
               if(updateWayID == -1) //predict bypass
               {
                 //printf("sampler[%u][%u] update-1 bypass.\n", setInSampler, updateWayID);
-                update_history(PC);
+                m_predict->update_history(PC);
                 return;
               }
 
@@ -257,12 +257,12 @@ void CACHE_REPLACEMENT_STATE::UpdateReplacementState(
               }
 
               //----------------------------check if the prediction incorrect-----------------------
+              //prediction direction
               if(predict_block.Yout <= m_predict->theta || (final_weight <= m_predict->tao_replace)){
                 for(int i= 1; i<= 6; i++){
                   //last value 1 is because we need to increase the total weight to predict block dead
                   m_predict->update_weight(i, predict_block.index_of_feature[i-1], 1);
                 }
-
               }
               //change sampler block
               vector<int> index= m_predict->getIndex(PC, currLine->tag);
@@ -272,6 +272,7 @@ void CACHE_REPLACEMENT_STATE::UpdateReplacementState(
               sampler[ setIndex ][ updateWayID ].Yout= final_weight;*/
 
               //update new index predict table value
+              //----might reduce
               for(int i= 1; i<= 6; i++){
                 m_predict->update_weight(i, index[i-1], -1);
               }
@@ -304,6 +305,7 @@ void CACHE_REPLACEMENT_STATE::UpdateReplacementState(
               if(updateWayID == -1) //predict bypass
               {
                 //printf("updateWayID predict bypass\n");
+                m_predict->update_history(PC);
                 return;
               }
 
