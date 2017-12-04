@@ -193,9 +193,9 @@ void CACHE_REPLACEMENT_STATE::UpdateReplacementState(
         if(InSampler == 0){
           UINT32 setInSampler= setIndex/64;
           Addr_t curr_tag= currLine->tag;
-          bool samplerHit;
+          bool samplerHit=-1;
           int hitway=0;
-          //printf("set=%u, setInSampler=%u, currTag=%llu\n", setIndex, setInSampler, curr_tag);
+          printf("set=%u, setInSampler=%u, currTag=%llu\n", setIndex, setInSampler, curr_tag);
           for(UINT32 way=0; way<SAMPLER_CACHE_WAYS; way++)
           {
               //check current block is in sampler set
@@ -206,6 +206,7 @@ void CACHE_REPLACEMENT_STATE::UpdateReplacementState(
           }
 
           if(samplerHit){
+              printf("sampler[%u][%u] bypass.\n", setInSampler, hitway);
               vector<int> index;
               index = sampler[ setInSampler ][ hitway ].index_of_feature;
               int final_weight=0;
@@ -213,6 +214,7 @@ void CACHE_REPLACEMENT_STATE::UpdateReplacementState(
               for(int i= 1; i<=6; i++){
                 final_weight+= m_predict->get_weight(i, index[i-1]);
               }
+              printf("\n" );
 
               if(final_weight > m_predict->theta){
                 for(int i=1; i<=6; i++){
@@ -222,6 +224,10 @@ void CACHE_REPLACEMENT_STATE::UpdateReplacementState(
               }
               UpdateMyPolicy( setInSampler, hitway, index, curr_tag, final_weight);
 
+              int blockalive = (final_weight <= m_predict->tao_replace)? true: false;
+              UpdateLRU(setIndex, updateWayID, blockalive);
+              //int a;
+              //a= scanf("%d\n", &a);
           }
           else{
               //can't find block in sampler
@@ -230,24 +236,26 @@ void CACHE_REPLACEMENT_STATE::UpdateReplacementState(
               //update new index predict table value
 
               if(updateWayID == -1) //predict bypass
+              {
+                printf("sampler[%u][%u] bypass.\n", setInSampler, updateWayID);
                 return;
+              }
 
-              SAMPLER_REPLACEMENT_STATE predict_block= sampler[ setIndex ][ updateWayID ];
-              //vector<int> index;
-              //index = sampler[ setIndex ][ updateWayID ].index_of_feature;
+              SAMPLER_REPLACEMENT_STATE predict_block= sampler[ setInSampler ][ updateWayID ];
+              printf("sampler[%u][%u] miss\n", setInSampler, updateWayID);
 
               int final_weight=0;
-
               for(int i= 1; i<=6; i++){
                 final_weight+= m_predict->get_weight(i, predict_block.index_of_feature[i-1]);
               }
-
+              printf("\n" );
               //----------------------------check if the prediction incorrect-----------------------
               if(predict_block.Yout <= m_predict->theta || (final_weight <= m_predict->tao_replace)){
                 for(int i= 1; i<= 6; i++){
                   //last value 1 is because we need to increase the total weight to predict block dead
                   m_predict->update_weight(i, predict_block.index_of_feature[i-1], 1);
                 }
+                printf("finish update weight\n" );
               }
               //change sampler block
               vector<int> index= m_predict->getIndex(PC, currLine->tag);
@@ -261,18 +269,22 @@ void CACHE_REPLACEMENT_STATE::UpdateReplacementState(
                 m_predict->update_weight(i, index[i-1], -1);
               }
               UpdateMyPolicy(setIndex, updateWayID, index, currLine->tag, final_weight);
-
+              int blockalive = (final_weight <= m_predict->tao_replace)? true: false;
+              UpdateLRU(setIndex, updateWayID, blockalive);
           }
+          int a;
+          a= scanf("%d\n", &a);
         }
         else{
           //in real cache
           if(cacheHit){
               int final_weight=0;
               vector<int> index= m_predict->getIndex(PC, currLine->tag);
-
+              printf("in real cache\n");
               for(int i= 1; i<=6; i++){
                 final_weight+= m_predict->get_weight(i, index[i-1]);
               }
+              printf("\n" );
 
               if(final_weight <= m_predict->tao_replace)
                 repl[ setIndex ][ updateWayID ].blockalive= 1;
@@ -282,13 +294,12 @@ void CACHE_REPLACEMENT_STATE::UpdateReplacementState(
               UpdateLRU(setIndex, updateWayID);
           }
           else{
-              //can't find block in sampler
-              //update old index predict table value
-              //change sampler block
-              //update new index predict table value
-
+              printf("in real cache, no hit\n");
               if(updateWayID == -1) //predict bypass
+              {
+                printf("updateWayID predict bypass\n");
                 return;
+              }
 
               int final_weight=0;
               vector<int> index= m_predict->getIndex(PC, currLine->tag);
@@ -296,7 +307,7 @@ void CACHE_REPLACEMENT_STATE::UpdateReplacementState(
               for(int i= 1; i<=6; i++){
                 final_weight+= m_predict->get_weight(i, index[i-1]);
               }
-
+              printf("\n" );
               //change sampler block
               if(final_weight <= m_predict->tao_replace)
                 repl[ setIndex ][ updateWayID ].blockalive= 1;
@@ -444,44 +455,15 @@ CACHE_REPLACEMENT_STATE::~CACHE_REPLACEMENT_STATE (void) {
 }
 
 
-
-void SAMPLER_CACHE::InitReplacementState(){
-
-  //create sampler cache
-  repl  = new LINE_REPLACEMENT_STATE* [ numsets ];
-
-  // ensure that we were able to create replacement state
-  assert(repl);
-
-  // Create the state for the sets
-  for(UINT32 setIndex=0; setIndex<numsets; setIndex++)
-  {
-      repl[ setIndex ]  = new LINE_REPLACEMENT_STATE[ assoc ];
-
-      for(UINT32 way=0; way<assoc; way++)
-      {
-          repl[ setIndex ][ way ].LRUstackposition = way;
-          repl[ setIndex ][ way ].blockalive = false;
-
-      }
-  }
-}
-
-Addr_t SAMPLER_CACHE::GetIndex(Addr_t PC, int feature){
-  Addr_t _returnAddr;
-  _returnAddr= 0;
-
-  return _returnAddr;
-}
-
 int PREDICTOR::predict(Addr_t currPC, Addr_t currLine, int whichtao){
   int _result=-1;
-
+  printf("start predict\n");
   vector<int> index= getIndex(currPC, currLine);
   int final_weight=0;
   for(int i=1; i<=6; i++){
     final_weight+= get_weight(i, index[i-1]);
   }
+  printf("\n" );
 
   _result=  (final_weight<= tao_bypass)? 1: -1;
   return _result;
@@ -513,11 +495,12 @@ int PREDICTOR::get_weight(int whichfeature, int index){
         printf("get_weight, the featureindex is not valid\n" );
         break;
     }
+    printf("%d ", returnweight);
     return returnweight;
 }
 
 void PREDICTOR::update_weight(int whichfeature, int index, int addorsub){
-
+  printf("update_weight\n");
   switch (whichfeature) {
     case 1:
       m_vfeature1[index]+=addorsub;
@@ -561,4 +544,10 @@ vector<int> PREDICTOR::getIndex(Addr_t currPC, Addr_t currLine){
   _return.push_back(feature6);
 
   return _return;
+}
+
+void PREDICTOR::update_history(Addr_t currPC){
+  m_history[2]= m_history[1];
+  m_history[1]= m_history[0];
+  m_history[0]= currPC;
 }

@@ -85,6 +85,7 @@ public:
   int get_weight(int whichfeature, int index);
   void update_weight(int whichfeature, int index, int addorsub);
   vector<int> getIndex(Addr_t currPC, Addr_t currLine);
+  void update_history(Addr_t currPC);
 };
 // #define A 95219 /* a prime */
 // #define B 240899 /* another prime */
@@ -130,7 +131,6 @@ public:
   public:
     ostream & PrintStats(ostream &out);
     PREDICTOR *m_predict;
-
     // The constructor CAN NOT be changed
     CACHE_REPLACEMENT_STATE( UINT32 _sets, UINT32 _assoc, UINT32 _pol );
     CACHE_REPLACEMENT_STATE(){};
