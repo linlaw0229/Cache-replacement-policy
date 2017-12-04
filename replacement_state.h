@@ -66,9 +66,9 @@ public:
     m_vfeature4.resize(256, 0);
     m_vfeature5.resize(256, 0);
     m_vfeature6.resize(256, 0);
-    tao_bypass= 15;
+    tao_bypass= 3;
     tao_replace= 124;
-    theta= 68;
+    theta= 168;
   };
   int tao_bypass;  //for predicting block bypass
   int tao_replace; //for predicting block replace
@@ -155,8 +155,11 @@ public:
     INT32  Get_LRU_Victim( UINT32 setIndex );
     INT32  Get_My_Victim( UINT32 setIndex );
     void   UpdateLRU( UINT32 setIndex, INT32 updateWayID );
-    void   UpdateMyPolicy( UINT32 setIndex, INT32 updateWayID, vector<int> index,
-              Addr_t tag, int Yout);
+
+    void   UpdateMyPolicy( UINT32 setIndex, INT32 updateWayID,
+      vector<int> _index, Addr_t _tag, int _Yout);
+
+    void   UpdateLRU( UINT32 setIndex, INT32 updateWayID, int blockalive );
 };
 
 class SAMPLER_CACHE : public CACHE_REPLACEMENT_STATE

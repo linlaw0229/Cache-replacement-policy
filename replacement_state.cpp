@@ -220,7 +220,8 @@ void CACHE_REPLACEMENT_STATE::UpdateReplacementState(
                   m_predict->update_weight(i, index[i-1], -1);
                 }
               }
-              UpdateMyPolicy( setInSampler, hitway );
+              UpdateMyPolicy( setInSampler, hitway, index, curr_tag, final_weight);
+
           }
           else{
               //can't find block in sampler
@@ -260,7 +261,7 @@ void CACHE_REPLACEMENT_STATE::UpdateReplacementState(
                 m_predict->update_weight(i, index[i-1], -1);
               }
               UpdateMyPolicy(setIndex, updateWayID, index, currLine->tag, final_weight);
-              
+
           }
         }
         else{
@@ -381,6 +382,23 @@ void CACHE_REPLACEMENT_STATE::UpdateLRU( UINT32 setIndex, INT32 updateWayID )
 	repl[ setIndex ][ updateWayID ].LRUstackposition = 0;
 }
 
+void CACHE_REPLACEMENT_STATE::UpdateLRU( UINT32 setIndex, INT32 updateWayID, int blockalive ){
+  // Determine current LRU stack position
+	UINT32 currLRUstackposition = repl[ setIndex ][ updateWayID ].LRUstackposition;
+
+	// Update the stack position of all lines before the current line
+	// Update implies incremeting their stack positions by one
+
+	for(UINT32 way=0; way<assoc; way++) {
+		if( repl[setIndex][way].LRUstackposition < currLRUstackposition ) {
+			repl[setIndex][way].LRUstackposition++;
+		}
+	}
+
+	// Set the LRU stack position of new line to be zero
+	repl[ setIndex ][ updateWayID ].LRUstackposition = 0;
+  repl[ setIndex ][ updateWayID ].blockalive= blockalive;
+}
 
 
 INT32 CACHE_REPLACEMENT_STATE::Get_My_Victim( UINT32 setIndex ) {
@@ -401,7 +419,8 @@ INT32 CACHE_REPLACEMENT_STATE::Get_My_Victim( UINT32 setIndex ) {
 	return _returnWay;
 }
 
-void CACHE_REPLACEMENT_STATE::UpdateMyPolicy( UINT32 setIndex, INT32 updateWayID ) {
+void CACHE_REPLACEMENT_STATE::UpdateMyPolicy( UINT32 setIndex, INT32 updateWayID,
+    vector<int> _index, Addr_t _tag, int _Yout){
   // Determine current LRU stack position
   UINT32 currLRUstackposition = sampler[ setIndex ][ updateWayID ].LRUstackposition;
 
@@ -416,6 +435,9 @@ void CACHE_REPLACEMENT_STATE::UpdateMyPolicy( UINT32 setIndex, INT32 updateWayID
 
   // Set the LRU stack position of new line to be zero
   sampler[ setIndex ][ updateWayID ].LRUstackposition = 0;
+  sampler[ setIndex ][ updateWayID ].index_of_feature= _index;
+  sampler[ setIndex ][ updateWayID ].tag= _tag;
+  sampler[ setIndex ][ updateWayID ].Yout= _Yout;
 }
 
 CACHE_REPLACEMENT_STATE::~CACHE_REPLACEMENT_STATE (void) {
