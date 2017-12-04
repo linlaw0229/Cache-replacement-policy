@@ -148,7 +148,7 @@ INT32 CACHE_REPLACEMENT_STATE::GetVictimInSet( UINT32 tid, UINT32 setIndex, cons
         int _return;
         _return = m_predict->predict(PC, tag, CHECKBYPASS);
         //printf("after predict=%d\n", _return);
-        if(_return == -1){
+        if(_return != -1){
           _return = Get_My_Victim (setIndex);
           //printf("after get my victim=%d\n", _return);
           if(_return == -1){
@@ -221,8 +221,8 @@ void CACHE_REPLACEMENT_STATE::UpdateReplacementState(
                 final_weight+= m_predict->get_weight(i, index[i-1]);
               }
 
-
-              if(final_weight > m_predict->theta){
+              int negative= -1 * m_predict->theta;
+              if(final_weight > negative){
                 for(int i=1; i<=6; i++){
                   //last value -1 is because we need to lower the total weight to keep block alive
                   m_predict->update_weight(i, index[i-1], -1);
@@ -244,6 +244,7 @@ void CACHE_REPLACEMENT_STATE::UpdateReplacementState(
               if(updateWayID == -1) //predict bypass
               {
                 //printf("sampler[%u][%u] update-1 bypass.\n", setInSampler, updateWayID);
+                update_history(PC);
                 return;
               }
 
@@ -324,6 +325,7 @@ void CACHE_REPLACEMENT_STATE::UpdateReplacementState(
 
         }
     }
+    m_predict->update_history(PC);
 }
 
 ////////////////////////////////////////////////////////////////////////////////

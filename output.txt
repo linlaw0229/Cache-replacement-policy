@@ -1,30 +1,30 @@
 Trace                                   	**********LRU***********|*********MY POLICY*********|*******SPEEDUP*******
-../traces/400.perlbench-50B.trace.gz    	MPKI: 0.330 IPC: 2.580	| MPKI: 0.320 IPC: 2.591	| Speed up: 1.00422448
-../traces/401.bzip2-226B.trace.gz       	MPKI: 0.118 IPC: 3.547	| MPKI: 0.250 IPC: 3.453	| Speed up: 0.97335777
-../traces/403.gcc-16B.trace.gz          	MPKI: 1.576 IPC: 1.464	| MPKI: 5.044 IPC: 0.818	| Speed up: 0.55881148
-../traces/410.bwaves-1963B.trace.gz     	MPKI: 0.196 IPC: 3.320	| MPKI: 0.280 IPC: 3.162	| Speed up: 0.95243976
+../traces/400.perlbench-50B.trace.gz    	MPKI: 0.330 IPC: 2.580	| MPKI: 0.334 IPC: 2.575	| Speed up: 0.99798465
+../traces/401.bzip2-226B.trace.gz       	MPKI: 0.118 IPC: 3.547	| MPKI: 0.118 IPC: 3.547	| Speed up: 1.00000000
+../traces/403.gcc-16B.trace.gz          	MPKI: 1.576 IPC: 1.464	| MPKI: 1.611 IPC: 1.452	| Speed up: 0.99207650
+../traces/410.bwaves-1963B.trace.gz     	MPKI: 0.196 IPC: 3.320	| MPKI: 0.196 IPC: 3.320	| Speed up: 1.00000000
 ../traces/416.gamess-875B.trace.gz      	MPKI: 0.000 IPC: 3.711	| MPKI: 0.000 IPC: 3.711	| Speed up: 1.00000000
-../traces/433.milc-337B.trace.gz        	MPKI: 9.851 IPC: 0.824	| MPKI: 10.040 IPC: 0.815	| Speed up: 0.98931520
-../traces/434.zeusmp-10B.trace.gz       	MPKI: 0.420 IPC: 3.386	| MPKI: 1.039 IPC: 2.991	| Speed up: 0.88317288
-../traces/435.gromacs-111B.trace.gz     	MPKI: 0.107 IPC: 3.594	| MPKI: 0.018 IPC: 3.812	| Speed up: 1.06059426
-../traces/436.cactusADM-1804B.trace.gz  	MPKI: 2.810 IPC: 2.249	| MPKI: 2.529 IPC: 2.474	| Speed up: 1.10005781
-../traces/437.leslie3d-149B.trace.gz    	MPKI: 0.442 IPC: 3.285	| MPKI: 0.466 IPC: 3.256	| Speed up: 0.99117119
-../traces/444.namd-426B.trace.gz        	MPKI: 0.057 IPC: 3.653	| MPKI: 0.083 IPC: 3.608	| Speed up: 0.98757220
-../traces/445.gobmk-30B.trace.gz        	MPKI: 0.132 IPC: 2.627	| MPKI: 0.305 IPC: 2.429	| Speed up: 0.92444715
-../traces/447.dealII-3B.trace.gz        	MPKI: 0.010 IPC: 3.917	| MPKI: 0.069 IPC: 3.845	| Speed up: 0.98156753
-../traces/450.soplex-247B.trace.gz      	MPKI: 6.005 IPC: 1.258	| MPKI: 10.440 IPC: 0.983	| Speed up: 0.78163752
+../traces/433.milc-337B.trace.gz        	MPKI: 9.851 IPC: 0.824	| MPKI: 9.851 IPC: 0.824	| Speed up: 1.00000000
+../traces/434.zeusmp-10B.trace.gz       	MPKI: 0.420 IPC: 3.386	| MPKI: 0.420 IPC: 3.386	| Speed up: 1.00000000
+../traces/435.gromacs-111B.trace.gz     	MPKI: 0.107 IPC: 3.594	| MPKI: 0.107 IPC: 3.594	| Speed up: 0.99988872
+../traces/436.cactusADM-1804B.trace.gz  	MPKI: 2.810 IPC: 2.249	| MPKI: 2.826 IPC: 2.238	| Speed up: 0.99506381
+../traces/437.leslie3d-149B.trace.gz    	MPKI: 0.442 IPC: 3.285	| MPKI: 0.443 IPC: 3.284	| Speed up: 0.99969556
+../traces/444.namd-426B.trace.gz        	MPKI: 0.057 IPC: 3.653	| MPKI: 0.057 IPC: 3.653	| Speed up: 0.99997263
+../traces/445.gobmk-30B.trace.gz        	MPKI: 0.132 IPC: 2.627	| MPKI: 0.133 IPC: 2.626	| Speed up: 0.99950520
+../traces/447.dealII-3B.trace.gz        	MPKI: 0.010 IPC: 3.917	| MPKI: 0.011 IPC: 3.916	| Speed up: 0.99971917
+../traces/450.soplex-247B.trace.gz      	MPKI: 6.005 IPC: 1.258	| MPKI: 6.066 IPC: 1.253	| Speed up: 0.99610493
 ../traces/453.povray-576B.trace.gz      	MPKI: 0.002 IPC: 2.812	| MPKI: 0.002 IPC: 2.812	| Speed up: 1.00000000
-../traces/454.calculix-460B.trace.gz    	MPKI: 0.097 IPC: 3.647	| MPKI: 0.388 IPC: 3.120	| Speed up: 0.85534108
-../traces/456.hmmer-88B.trace.gz        	MPKI: 0.002 IPC: 3.976	| MPKI: 0.002 IPC: 3.977	| Speed up: 1.00022636
-../traces/458.sjeng-767B.trace.gz       	MPKI: 0.259 IPC: 3.238	| MPKI: 0.276 IPC: 3.220	| Speed up: 0.99441013
-../traces/459.GemsFDTD-1491B.trace.gz   	MPKI: 3.313 IPC: 1.605	| MPKI: 6.719 IPC: 1.079	| Speed up: 0.67223226
-../traces/462.libquantum-714B.trace.gz  	MPKI: 0.114 IPC: 1.914	| MPKI: 0.103 IPC: 2.015	| Speed up: 1.05303307
-../traces/464.h264ref-97B.trace.gz      	MPKI: 0.188 IPC: 3.453	| MPKI: 0.188 IPC: 3.453	| Speed up: 0.99997104
-../traces/465.tonto-1769B.trace.gz      	MPKI: 0.061 IPC: 3.720	| MPKI: 0.080 IPC: 3.700	| Speed up: 0.99478467
-../traces/470.lbm-1274B.trace.gz        	MPKI: 4.663 IPC: 2.505	| MPKI: 5.030 IPC: 2.475	| Speed up: 0.98782581
-../traces/473.astar-42B.trace.gz        	MPKI: 0.704 IPC: 2.489	| MPKI: 13.110 IPC: 0.954	| Speed up: 0.38315054
-../traces/481.wrf-196B.trace.gz         	MPKI: 0.496 IPC: 3.097	| MPKI: 0.797 IPC: 2.821	| Speed up: 0.91089013
-../traces/482.sphinx3-417B.trace.gz     	MPKI: 3.637 IPC: 1.370	| MPKI: 2.797 IPC: 1.567	| Speed up: 1.14393110
-../traces/483.xalancbmk-127B.trace.gz   	MPKI: 11.852 IPC: 0.464	| MPKI: 9.332 IPC: 0.552	| Speed up: 1.18956222
+../traces/454.calculix-460B.trace.gz    	MPKI: 0.097 IPC: 3.647	| MPKI: 0.097 IPC: 3.647	| Speed up: 0.99997258
+../traces/456.hmmer-88B.trace.gz        	MPKI: 0.002 IPC: 3.976	| MPKI: 0.002 IPC: 3.976	| Speed up: 1.00005030
+../traces/458.sjeng-767B.trace.gz       	MPKI: 0.259 IPC: 3.238	| MPKI: 0.259 IPC: 3.238	| Speed up: 0.99996912
+../traces/459.GemsFDTD-1491B.trace.gz   	MPKI: 3.313 IPC: 1.605	| MPKI: 3.367 IPC: 1.593	| Speed up: 0.99239923
+../traces/462.libquantum-714B.trace.gz  	MPKI: 0.114 IPC: 1.914	| MPKI: 0.114 IPC: 1.914	| Speed up: 1.00000000
+../traces/464.h264ref-97B.trace.gz      	MPKI: 0.188 IPC: 3.453	| MPKI: 0.190 IPC: 3.450	| Speed up: 0.99913114
+../traces/465.tonto-1769B.trace.gz      	MPKI: 0.061 IPC: 3.720	| MPKI: 0.065 IPC: 3.716	| Speed up: 0.99895156
+../traces/470.lbm-1274B.trace.gz        	MPKI: 4.663 IPC: 2.505	| MPKI: 4.664 IPC: 2.505	| Speed up: 0.99996008
+../traces/473.astar-42B.trace.gz        	MPKI: 0.704 IPC: 2.489	| MPKI: 0.713 IPC: 2.486	| Speed up: 0.99891527
+../traces/481.wrf-196B.trace.gz         	MPKI: 0.496 IPC: 3.097	| MPKI: 0.496 IPC: 3.098	| Speed up: 1.00006457
+../traces/482.sphinx3-417B.trace.gz     	MPKI: 3.637 IPC: 1.370	| MPKI: 3.640 IPC: 1.369	| Speed up: 0.99948909
+../traces/483.xalancbmk-127B.trace.gz   	MPKI: 11.852 IPC: 0.464	| MPKI: 11.873 IPC: 0.463	| Speed up: 0.99870606
 _______________________________________________________________________________________________________________________
-Geometric Mean: 0.91941873
+Geometric Mean: 0.99879832
