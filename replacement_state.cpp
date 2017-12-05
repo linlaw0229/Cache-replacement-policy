@@ -142,6 +142,8 @@ INT32 CACHE_REPLACEMENT_STATE::GetVictimInSet( UINT32 tid, UINT32 setIndex, cons
     }
     else if( replPolicy == CRC_REPL_CONTESTANT )
     {
+      if(accessType == ACCESS_PREFETCH || accessType == ACCESS_WRITEBACK)
+        return -1;
         //printf("before predict\n" );
         // Contestants:  ADD YOUR VICTIM SELECTION FUNCTION HERE
         Addr_t tag= paddr >> 18;
@@ -543,8 +545,10 @@ vector<int> PREDICTOR::getIndex(Addr_t currPC, Addr_t currLine){
   Addr_t feature2 = ((m_history[0] >>1) ^ currPC)%256;
   Addr_t feature3 = ((m_history[1] >>2) ^ currPC)%256;
   Addr_t feature4 = ((m_history[2] >>3) ^ currPC)%256;
-  Addr_t feature5 = ((currLine >> 4) ^ currPC)%256;
-  Addr_t feature6 = ((currLine >> 7) ^ currPC)%256;
+  Addr_t feature5 = ((currLine >> 3) ^ currPC)%256;
+  Addr_t feature6 = ((currLine >> 6) ^ currPC)%256;
+  //Addr_t feature5 = ((currLine >> 4) ^ currPC)%256;
+  //Addr_t feature6 = ((currLine >> 7) ^ currPC)%256;
   vector<int> _return;
   _return.push_back(feature1);
   _return.push_back(feature2);

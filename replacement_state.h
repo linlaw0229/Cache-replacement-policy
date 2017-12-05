@@ -66,7 +66,7 @@ public:
     m_vfeature4.resize(256, 0);
     m_vfeature5.resize(256, 0);
     m_vfeature6.resize(256, 0);
-    tao_bypass= 16;
+    tao_bypass= 15;
     tao_replace= 124;
     theta= 68;
   };
