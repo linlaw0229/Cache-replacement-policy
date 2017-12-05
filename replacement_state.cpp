@@ -259,8 +259,8 @@ void CACHE_REPLACEMENT_STATE::UpdateReplacementState(
               //----------------------------check if the prediction incorrect-----------------------
               //prediction direction
               bool direction_same = ((final_weight <= m_predict->tao_replace) && (predict_block.Yout <= m_predict->tao_replace))? 1:-1;
-              //if(predict_block.Yout <= m_predict->theta || direction_same){
-              if(predict_block.Yout <= m_predict->theta || final_weight<= m_predict->tao_replace){
+              if(predict_block.Yout <= m_predict->theta || direction_same){
+              //if(predict_block.Yout <= m_predict->theta || final_weight<= m_predict->tao_replace){
                 for(int i= 1; i<= 6; i++){
                   //last value 1 is because we need to increase the total weight to predict block dead
                   m_predict->update_weight(i, predict_block.index_of_feature[i-1], 1);
@@ -511,22 +511,28 @@ void PREDICTOR::update_weight(int whichfeature, int index, int addorsub){
 
   switch (whichfeature) {
     case 1:
-      m_vfeature1[index]+=addorsub;
+      if(abs(m_vfeature1[index]) < 32)
+        m_vfeature1[index]+=addorsub;
       break;
     case 2:
-      m_vfeature2[index]+=addorsub;
+      if(abs(m_vfeature2[index]) < 32)
+        m_vfeature2[index]+=addorsub;
       break;
     case 3:
-      m_vfeature3[index]+=addorsub;
+      if(abs(m_vfeature3[index]) < 32)
+        m_vfeature3[index]+=addorsub;
       break;
     case 4:
-      m_vfeature4[index]+=addorsub;
+      if(abs(m_vfeature4[index]) < 32)
+        m_vfeature4[index]+=addorsub;
       break;
     case 5:
-      m_vfeature5[index]+=addorsub;
+      if(abs(m_vfeature5[index]) < 32)
+        m_vfeature5[index]+=addorsub;
       break;
     case 6:
-      m_vfeature6[index]+=addorsub;
+      if(abs(m_vfeature6[index]) < 32)
+        m_vfeature6[index]+=addorsub;
       break;
     default:
       printf("update_weight, the featureindex is not valid\n" );

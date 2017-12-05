@@ -87,30 +87,7 @@ public:
   vector<int> getIndex(Addr_t currPC, Addr_t currLine);
   void update_history(Addr_t currPC);
 };
-// #define A 95219 /* a prime */
-// #define B 240899 /* another prime */
-// #define C 605921 /* yet another prime */
-// #define FIRSTH 37 /* also prime */
-// unsigned hash_str(const char* s)
-// {
-//    unsigned h = FIRSTH;
-//    while (*s) {
-//      h = (h * A) ^ (s[0] * B);
-//      s++;
-//    }
-//    return h; // or return h % C;
-// }
-//
-// template < typename T > string ToString( const T& n )
-// {
-//         ostringstream stm ;
-//         stm << n ;
-//         return stm.str() ;
-// }
-
 //struct sampler; // Jimenez's structures
-
-
 
 // The implementation for the cache replacement policy
 class CACHE_REPLACEMENT_STATE

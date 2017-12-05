@@ -1,5 +1,5 @@
 Trace                                   	**********LRU***********|*********MY POLICY*********|*******SPEEDUP*******
-../traces/400.perlbench-50B.trace.gz    	MPKI: 0.330 IPC: 2.580	| MPKI: 0.364 IPC: 2.542	| Speed up: 0.98515619
+../traces/400.perlbench-50B.trace.gz    	MPKI: 0.330 IPC: 2.580	| MPKI: 0.351 IPC: 2.556	| Speed up: 0.99069840
 ../traces/401.bzip2-226B.trace.gz       	MPKI: 0.118 IPC: 3.547	| MPKI: 0.119 IPC: 3.547	| Speed up: 0.99988723
 ../traces/403.gcc-16B.trace.gz          	MPKI: 1.576 IPC: 1.464	| MPKI: 1.623 IPC: 1.448	| Speed up: 0.98934426
 ../traces/410.bwaves-1963B.trace.gz     	MPKI: 0.196 IPC: 3.320	| MPKI: 0.196 IPC: 3.320	| Speed up: 1.00000000
@@ -19,12 +19,12 @@ Trace                                   	**********LRU***********|*********MY PO
 ../traces/458.sjeng-767B.trace.gz       	MPKI: 0.259 IPC: 3.238	| MPKI: 0.259 IPC: 3.237	| Speed up: 0.99975293
 ../traces/459.GemsFDTD-1491B.trace.gz   	MPKI: 3.313 IPC: 1.605	| MPKI: 3.398 IPC: 1.586	| Speed up: 0.98810043
 ../traces/462.libquantum-714B.trace.gz  	MPKI: 0.114 IPC: 1.914	| MPKI: 0.114 IPC: 1.914	| Speed up: 1.00000000
-../traces/464.h264ref-97B.trace.gz      	MPKI: 0.188 IPC: 3.453	| MPKI: 0.194 IPC: 3.445	| Speed up: 0.99782785
+../traces/464.h264ref-97B.trace.gz      	MPKI: 0.188 IPC: 3.453	| MPKI: 0.194 IPC: 3.445	| Speed up: 0.99788577
 ../traces/465.tonto-1769B.trace.gz      	MPKI: 0.061 IPC: 3.720	| MPKI: 0.067 IPC: 3.714	| Speed up: 0.99841389
 ../traces/470.lbm-1274B.trace.gz        	MPKI: 4.663 IPC: 2.505	| MPKI: 4.664 IPC: 2.505	| Speed up: 0.99996008
 ../traces/473.astar-42B.trace.gz        	MPKI: 0.704 IPC: 2.489	| MPKI: 0.720 IPC: 2.484	| Speed up: 0.99803142
 ../traces/481.wrf-196B.trace.gz         	MPKI: 0.496 IPC: 3.097	| MPKI: 0.496 IPC: 3.097	| Speed up: 1.00003229
-../traces/482.sphinx3-417B.trace.gz     	MPKI: 3.637 IPC: 1.370	| MPKI: 3.640 IPC: 1.369	| Speed up: 0.99956208
+../traces/482.sphinx3-417B.trace.gz     	MPKI: 3.637 IPC: 1.370	| MPKI: 3.640 IPC: 1.369	| Speed up: 0.99948909
 ../traces/483.xalancbmk-127B.trace.gz   	MPKI: 11.852 IPC: 0.464	| MPKI: 11.876 IPC: 0.463	| Speed up: 0.99849040
 _______________________________________________________________________________________________________________________
-Geometric Mean: 0.99764039
+Geometric Mean: 0.99784714
