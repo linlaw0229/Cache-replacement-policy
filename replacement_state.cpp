@@ -194,9 +194,9 @@ void CACHE_REPLACEMENT_STATE::UpdateReplacementState(
     }
     else if( replPolicy == CRC_REPL_CONTESTANT )
     {
-        UINT32 InSampler= setIndex%64;
+        UINT32 InSampler= setIndex%SAMPLER_CACHE_SETS;
         if(InSampler == 0){
-          UINT32 setInSampler= setIndex/64;
+          UINT32 setInSampler= setIndex/SAMPLER_CACHE_SETS;
           Addr_t curr_tag= currLine->tag;
           bool samplerHit= false;
           int hitway=0;
@@ -223,6 +223,7 @@ void CACHE_REPLACEMENT_STATE::UpdateReplacementState(
 
               int negative= -1 * m_predict->theta;
               if(final_weight > negative){
+              //if(final_weight> m_predict->theta){
                 for(int i=1; i<=6; i++){
                   //last value -1 is because we need to lower the total weight to keep block alive
                   m_predict->update_weight(i, index[i-1], -1);
@@ -268,16 +269,11 @@ void CACHE_REPLACEMENT_STATE::UpdateReplacementState(
               }
               //change sampler block
               vector<int> index= m_predict->getIndex(PC, currLine->tag);
-              //sampler[ setIndex ][ updateWayID ].blockalive= (final_weight <= m_predict->tao_replace)? true : false;
-              /*sampler[ setIndex ][ updateWayID ].index_of_feature= index;
-              sampler[ setIndex ][ updateWayID ].tag= currLine->tag;
-              sampler[ setIndex ][ updateWayID ].Yout= final_weight;*/
-
               //update new index predict table value
               //----might reduce
-              for(int i= 1; i<= 6; i++){
-                m_predict->update_weight(i, index[i-1], -1);
-              }
+//              for(int i= 1; i<= 6; i++){
+//                m_predict->update_weight(i, index[i-1], 1);
+//              }
 
               UpdateMyPolicy(setInSampler, updateWayID, index, currLine->tag, final_weight);
               int blockalive = (final_weight <= m_predict->tao_replace)? true: false;
