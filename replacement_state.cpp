@@ -266,7 +266,7 @@ void CACHE_REPLACEMENT_STATE::UpdateReplacementState(
               //if(predict_block.Yout <= m_predict->theta || final_weight<= m_predict->tao_replace){
                 for(int i= 1; i<= 6; i++){
                   //last value 1 is because we need to increase the total weight to predict block dead
-                  m_predict->update_weight(i, predict_block.index_of_feature[i-1], 1);
+                  m_predict->update_weight(i, predict_block.index_of_feature[i-1], 2);
                 }
               }
               //change sampler block
@@ -545,8 +545,8 @@ vector<int> PREDICTOR::getIndex(Addr_t currPC, Addr_t currLine){
   Addr_t feature2 = ((m_history[0] >>1) ^ currPC)%256;
   Addr_t feature3 = ((m_history[1] >>2) ^ currPC)%256;
   Addr_t feature4 = ((m_history[2] >>3) ^ currPC)%256;
-  Addr_t feature5 = ((currLine >> 3) ^ currPC)%256;
-  Addr_t feature6 = ((currLine >> 6) ^ currPC)%256;
+  Addr_t feature5 = ((currLine >> 2) ^ currPC)%256;
+  Addr_t feature6 = ((currLine >> 5) ^ currPC)%256;
   //Addr_t feature5 = ((currLine >> 4) ^ currPC)%256;
   //Addr_t feature6 = ((currLine >> 7) ^ currPC)%256;
   vector<int> _return;
