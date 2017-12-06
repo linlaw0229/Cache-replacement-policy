@@ -1,0 +1,30 @@
+Trace                                   	**********LRU***********|*********MY POLICY*********|*******SPEEDUP*******
+../traces/400.perlbench-50B.trace.gz    	MPKI: 0.330 IPC: 2.580	| MPKI: 0.153 IPC: 2.798	| Speed up: 1.08456709
+../traces/401.bzip2-226B.trace.gz       	MPKI: 0.118 IPC: 3.547	| MPKI: 0.144 IPC: 3.528	| Speed up: 0.99458697
+../traces/403.gcc-16B.trace.gz          	MPKI: 1.576 IPC: 1.464	| MPKI: 1.636 IPC: 1.444	| Speed up: 0.98654372
+../traces/410.bwaves-1963B.trace.gz     	MPKI: 0.196 IPC: 3.320	| MPKI: 0.290 IPC: 3.144	| Speed up: 0.94701807
+../traces/416.gamess-875B.trace.gz      	MPKI: 0.000 IPC: 3.711	| MPKI: 0.000 IPC: 3.711	| Speed up: 1.00000000
+../traces/433.milc-337B.trace.gz        	MPKI: 9.851 IPC: 0.824	| MPKI: 10.101 IPC: 0.812	| Speed up: 0.98591549
+../traces/434.zeusmp-10B.trace.gz       	MPKI: 0.420 IPC: 3.386	| MPKI: 0.734 IPC: 3.174	| Speed up: 0.93724529
+../traces/435.gromacs-111B.trace.gz     	MPKI: 0.107 IPC: 3.594	| MPKI: 0.003 IPC: 3.852	| Speed up: 1.07180614
+../traces/436.cactusADM-1804B.trace.gz  	MPKI: 2.810 IPC: 2.249	| MPKI: 1.851 IPC: 3.260	| Speed up: 1.44959310
+../traces/437.leslie3d-149B.trace.gz    	MPKI: 0.442 IPC: 3.285	| MPKI: 0.433 IPC: 3.297	| Speed up: 1.00374463
+../traces/444.namd-426B.trace.gz        	MPKI: 0.057 IPC: 3.653	| MPKI: 0.074 IPC: 3.623	| Speed up: 0.99181517
+../traces/445.gobmk-30B.trace.gz        	MPKI: 0.132 IPC: 2.627	| MPKI: 0.129 IPC: 2.632	| Speed up: 1.00171278
+../traces/447.dealII-3B.trace.gz        	MPKI: 0.010 IPC: 3.917	| MPKI: 0.036 IPC: 3.884	| Speed up: 0.99165177
+../traces/450.soplex-247B.trace.gz      	MPKI: 6.005 IPC: 1.258	| MPKI: 4.342 IPC: 1.405	| Speed up: 1.11693164
+../traces/453.povray-576B.trace.gz      	MPKI: 0.002 IPC: 2.812	| MPKI: 0.002 IPC: 2.812	| Speed up: 1.00000000
+../traces/454.calculix-460B.trace.gz    	MPKI: 0.097 IPC: 3.647	| MPKI: 0.065 IPC: 3.717	| Speed up: 1.01916539
+../traces/456.hmmer-88B.trace.gz        	MPKI: 0.002 IPC: 3.976	| MPKI: 0.001 IPC: 3.978	| Speed up: 1.00042758
+../traces/458.sjeng-767B.trace.gz       	MPKI: 0.259 IPC: 3.238	| MPKI: 0.256 IPC: 3.241	| Speed up: 1.00080296
+../traces/459.GemsFDTD-1491B.trace.gz   	MPKI: 3.313 IPC: 1.605	| MPKI: 3.628 IPC: 1.536	| Speed up: 0.95694972
+../traces/462.libquantum-714B.trace.gz  	MPKI: 0.114 IPC: 1.914	| MPKI: 0.109 IPC: 1.958	| Speed up: 1.02288521
+../traces/464.h264ref-97B.trace.gz      	MPKI: 0.188 IPC: 3.453	| MPKI: 0.030 IPC: 3.678	| Speed up: 1.06525139
+../traces/465.tonto-1769B.trace.gz      	MPKI: 0.061 IPC: 3.720	| MPKI: 0.060 IPC: 3.720	| Speed up: 1.00008065
+../traces/470.lbm-1274B.trace.gz        	MPKI: 4.663 IPC: 2.505	| MPKI: 3.668 IPC: 2.592	| Speed up: 1.03448689
+../traces/473.astar-42B.trace.gz        	MPKI: 0.704 IPC: 2.489	| MPKI: 1.854 IPC: 2.166	| Speed up: 0.87019405
+../traces/481.wrf-196B.trace.gz         	MPKI: 0.496 IPC: 3.097	| MPKI: 0.569 IPC: 3.026	| Speed up: 0.97694766
+../traces/482.sphinx3-417B.trace.gz     	MPKI: 3.637 IPC: 1.370	| MPKI: 0.343 IPC: 2.705	| Speed up: 1.97416247
+../traces/483.xalancbmk-127B.trace.gz   	MPKI: 11.852 IPC: 0.464	| MPKI: 7.932 IPC: 0.616	| Speed up: 1.32952340
+_______________________________________________________________________________________________________________________
+Geometric Mean: 1.05195159

@@ -1,0 +1,2 @@
+Trace                                   	**********LRU***********|*********MY POLICY*********|*******SPEEDUP*******
+../traces/400.perlbench-50B.trace.gz    	MPKI: 0.330 IPC: 2.580	| MPKI: 0.132 IPC: 2.826	| Speed up: 1.09541896

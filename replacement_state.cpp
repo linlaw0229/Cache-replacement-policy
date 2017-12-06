@@ -51,7 +51,6 @@ CACHE_REPLACEMENT_STATE::CACHE_REPLACEMENT_STATE( UINT32 _sets, UINT32 _assoc, U
     mytimer    = 0;
     m_predict = new PREDICTOR;
 
-    //printf("set: %u, assoc: %u, replacepol: %u\n", numsets, assoc, replPolicy);
     InitReplacementState();
 }
 
@@ -144,18 +143,14 @@ INT32 CACHE_REPLACEMENT_STATE::GetVictimInSet( UINT32 tid, UINT32 setIndex, cons
     {
       if(accessType == ACCESS_PREFETCH || accessType == ACCESS_WRITEBACK)
         return -1;
-        //printf("before predict\n" );
         // Contestants:  ADD YOUR VICTIM SELECTION FUNCTION HERE
         Addr_t tag= paddr >> 18;
         int _return;
         _return = m_predict->predict(PC, tag, CHECKBYPASS);
-        //printf("after predict=%d\n", _return);
         if(_return != -1){
           _return = Get_My_Victim (setIndex);
-          //printf("after get my victim=%d\n", _return);
           if(_return == -1){
             _return = Get_LRU_Victim(setIndex);
-            //printf("after get lrm victim=%d\n", _return);
           }
           return _return;
         }
@@ -202,7 +197,6 @@ void CACHE_REPLACEMENT_STATE::UpdateReplacementState(
           Addr_t curr_tag= currLine->tag;
           bool samplerHit= false;
           int hitway=0;
-          //printf("set=%u, setInSampler=%u, currTag=%llu\n", setIndex, setInSampler, curr_tag);
           for(UINT32 way=0; way<SAMPLER_CACHE_WAYS; way++)
           {
               //check current block is in sampler set
@@ -214,7 +208,6 @@ void CACHE_REPLACEMENT_STATE::UpdateReplacementState(
           }
 
           if(samplerHit){
-              //printf("sampler[%u][%u] hit.\n", setInSampler, hitway);
               vector<int> index;
               index = sampler[ setInSampler ][ hitway ].index_of_feature;
               int final_weight=0;
@@ -225,12 +218,10 @@ void CACHE_REPLACEMENT_STATE::UpdateReplacementState(
 
               int negative= -1 * m_predict->theta;
               if(final_weight > negative){
-              //if(final_weight> m_predict->theta){
                 for(int i=1; i<=6; i++){
                   //last value -1 is because we need to lower the total weight to keep block alive
                   m_predict->update_weight(i, index[i-1], -5);
                 }
-                //printf("finish_update weight 1\n" );
               }
               UpdateMyPolicy( setInSampler, hitway, index, curr_tag, final_weight);
 
@@ -245,7 +236,6 @@ void CACHE_REPLACEMENT_STATE::UpdateReplacementState(
               //update new index predict table value
 
               SAMPLER_REPLACEMENT_STATE predict_block= sampler[ setInSampler ][ updateWayID ];
-              //printf("sampler[%u][%u] miss\n", setInSampler, updateWayID);
 
               int final_weight=0;
               for(int i= 1; i<=6; i++){
@@ -254,10 +244,8 @@ void CACHE_REPLACEMENT_STATE::UpdateReplacementState(
 
               //----------------------------check if the prediction incorrect-----------------------
               //prediction direction
-              //bool direction_same = ((final_weight <= m_predict->tao_replace) && (predict_block.Yout <= m_predict->tao_replace))? 1:-1;
               bool direction_same = ((final_weight <= m_predict->tao_replace) && (cacheHit))? 1:-1;
               if(predict_block.Yout <= m_predict->theta || direction_same){
-              //if(predict_block.Yout <= m_predict->theta || final_weight<= m_predict->tao_replace){
                 for(int i= 1; i<= 6; i++){
                   //last value 1 is because we need to increase the total weight to predict block dead
                   m_predict->update_weight(i, predict_block.index_of_feature[i-1], 1);
@@ -426,16 +414,12 @@ void CACHE_REPLACEMENT_STATE::UpdateMyPolicy( UINT32 setIndex, INT32 updateWayID
   // Determine current LRU stack position
   UINT32 currLRUstackposition = sampler[ setIndex ][ updateWayID ].LRUstackposition;
 
-  // Update the stack position of all lines before the current line
-  // Update implies incremeting their stack positions by one
-
   for(UINT32 way=0; way<SAMPLER_CACHE_WAYS; way++) {
     if( sampler[setIndex][way].LRUstackposition < currLRUstackposition ) {
       sampler[setIndex][way].LRUstackposition++;
     }
   }
 
-  // Set the LRU stack position of new line to be zero
   sampler[ setIndex ][ updateWayID ].LRUstackposition = 0;
   sampler[ setIndex ][ updateWayID ].index_of_feature= _index;
   sampler[ setIndex ][ updateWayID ].tag= _tag;
@@ -448,7 +432,6 @@ CACHE_REPLACEMENT_STATE::~CACHE_REPLACEMENT_STATE (void) {
 
 int PREDICTOR::predict(Addr_t currPC, Addr_t currLine, int whichtao){
   int _result=-1;
-  //printf("start predict\n");
   vector<int> index= getIndex(currPC, currLine);
   int final_weight=0;
   for(int i=1; i<=6; i++){
@@ -460,7 +443,6 @@ int PREDICTOR::predict(Addr_t currPC, Addr_t currLine, int whichtao){
 
 int PREDICTOR::get_weight(int whichfeature, int index){
     int returnweight= 0;
-    //printf("get_weight, index=%d\n", index);
     switch (whichfeature) {
       case 1:
         returnweight= m_vfeature1[index];
@@ -529,8 +511,6 @@ vector<int> PREDICTOR::getIndex(Addr_t currPC, Addr_t currLine){
   Addr_t feature4 = ((m_history[2] >>3) ^ currPC)%256;
   Addr_t feature5 = ((currLine >> 2) ^ currPC)%256;
   Addr_t feature6 = ((currLine >> 5) ^ currPC)%256;
-  //Addr_t feature5 = ((currLine >> 4) ^ currPC)%256;
-  //Addr_t feature6 = ((currLine >> 7) ^ currPC)%256;
   vector<int> _return;
   _return.push_back(feature1);
   _return.push_back(feature2);
