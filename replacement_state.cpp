@@ -228,7 +228,7 @@ void CACHE_REPLACEMENT_STATE::UpdateReplacementState(
               //if(final_weight> m_predict->theta){
                 for(int i=1; i<=6; i++){
                   //last value -1 is because we need to lower the total weight to keep block alive
-                  m_predict->update_weight(i, index[i-1], -2);
+                  m_predict->update_weight(i, index[i-1], -5);
                 }
                 //printf("finish_update weight 1\n" );
               }
@@ -243,13 +243,6 @@ void CACHE_REPLACEMENT_STATE::UpdateReplacementState(
               //update old index predict table value
               //change sampler block
               //update new index predict table value
-
-              /*if(updateWayID == -1) //predict bypass
-              {
-                //printf("sampler[%u][%u] update-1 bypass.\n", setInSampler, updateWayID);
-                //m_predict->update_history(PC);
-                return;
-              }*/
 
               SAMPLER_REPLACEMENT_STATE predict_block= sampler[ setInSampler ][ updateWayID ];
               //printf("sampler[%u][%u] miss\n", setInSampler, updateWayID);
@@ -272,11 +265,6 @@ void CACHE_REPLACEMENT_STATE::UpdateReplacementState(
               }
               //change sampler block
               vector<int> index= m_predict->getIndex(PC, currLine->tag);
-              //update new index predict table value
-              //----might reduce
-              for(int i= 1; i<= 6; i++){
-                m_predict->update_weight(i, index[i-1], 1);
-              }
 
               UpdateMyPolicy(setInSampler, updateWayID, index, currLine->tag, final_weight);
               int blockalive = (final_weight <= m_predict->tao_replace)? true: false;

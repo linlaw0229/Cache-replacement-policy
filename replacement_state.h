@@ -68,7 +68,7 @@ public:
     m_vfeature6.resize(256, 0);
     tao_bypass= 15;
     tao_replace= 124;
-    theta= 68;
+    theta= 90;
   };
   int tao_bypass;  //for predicting block bypass
   int tao_replace; //for predicting block replace
