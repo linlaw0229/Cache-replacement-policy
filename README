@@ -1,6 +1,10 @@
-Welcome to the cache replacement and bypass competition for CSCE 614, Fall
-2015. You will be implementing a cache replacement and bypass policy in the
-"efectiu" infrastructure.
+This project implemented modern last-level cache(LLC) with the concept of 
+"Perceptron Learning for Reuse Prediction" that use neural network idea, 
+which is training the predictor by a smaller independent cache with a series 
+of features. The predictor yields significant performance improvements when 
+used to drive a replacement and bypass optimization.
+The simulation was tested under Linux with g++ versions 4.8.5, and evaluated 
+with different traces that provided by Dr. Daniel A. Jiménez.
 
 "Efectiu" means "cash" in Catalan, a play on the English pronunciation
 of the word "cache" and an allusion to the older cache simulator "Dinero"
